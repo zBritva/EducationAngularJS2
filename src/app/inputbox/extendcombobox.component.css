@@ -62,7 +62,7 @@
   /*left: .1em;*/
 }
 
-.combobox_list li.selected {
+.combobox_list li[selected=true] {
   color: #607D8B;
   background-color: #7797dd;
   /*left: .1em;*/

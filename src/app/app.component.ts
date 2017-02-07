@@ -8,15 +8,27 @@ import { BitBucketService } from './services/bitbucket/bitbucket.service'
   selector: 'education-app',
   template: `
     <h1>Hello {{name}} project</h1>
-    <extendcombobox [multiselect]="false" [dataservicename]="'github'"></extendcombobox>
+    <extendcombobox [multiselect]="true" [dataservicename]="'github'" (selectedItems)="countChangeFirst($event)"></extendcombobox>
+    <p *ngIf="countFirst">There are {{ countFirst }} selected items</p>
     <p>There is another html element</p>
-    <extendcombobox [multiselect]="false" [dataservicename]="'bitbucket'"></extendcombobox>
+    <extendcombobox [multiselect]="false" [dataservicename]="'bitbucket'" (selectedItems)="countChangeSecond($event)"></extendcombobox>
+    <p *ngIf="countSecond">There are {{ countSecond }} selected items</p>
   `,
 })
 export class AppComponent extends OnInit {
   name = 'Education Angular 2';
-
+  countFirst : number;
+  countSecond : number;
   ngOnInit(): void {
 
+  }
+
+  countChangeFirst(event : any) {
+    this.countFirst = event.length;
+  }
+
+
+  countChangeSecond(event : any) {
+    this.countSecond = event.length;
   }
 }

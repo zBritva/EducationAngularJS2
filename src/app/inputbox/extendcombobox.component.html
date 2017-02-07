@@ -8,7 +8,7 @@
   </div>
   <div *ngIf="isComboboxOpen" class="combobox_list" (blur)="onBlurValueList()">
     <ul>
-      <li *ngFor="let cbVal of data" (click)="onSelectValue(cbVal)">
+      <li *ngFor="let cbVal of data" (click)="onSelectValue(cbVal)" [attr.selected]="cbVal.selected">
         {{cbVal.name}}
       </li>
     </ul>

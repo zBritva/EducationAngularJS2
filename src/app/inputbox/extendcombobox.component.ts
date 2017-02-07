@@ -2,7 +2,10 @@
  * Created by User on 2/6/2017.
  */
 
-import {Component, OnInit, Input, Provider, ReflectiveInjector, Inject, Injector} from '@angular/core';
+import {
+  Component, OnInit, Input, Provider, ReflectiveInjector, Inject, Injector, Output,
+  EventEmitter
+} from '@angular/core';
 
 import {IDataService, IBaseData} from './extendcombobox.service.interface';
 import {GitHubService} from "../services/github/github.service";
@@ -21,16 +24,19 @@ import {BitBucketService} from "../services/bitbucket/bitbucket.service";
   ]
 })
 export class ExtendComboboxComponent implements OnInit {
+  isComboboxOpen: boolean;
+  dataService: IDataService;
   data: Array<IBaseData>;
+
   @Input()
   currentValue: string;
   @Input()
   multiselect: boolean;
   @Input()
   dataservicename: string;
-  isComboboxOpen: boolean;
 
-  dataService: IDataService;
+  @Output()
+  selectedItems = new EventEmitter<Array<IBaseData>>();
 
   constructor(private injector:Injector) {
   }
@@ -53,18 +59,52 @@ export class ExtendComboboxComponent implements OnInit {
     });
   }
 
+  _updateSelectedItems(): void {
+    this.selectedItems.emit(this.data.filter(function (value) {
+      return value.selected;
+    }));
+  }
+
   onOpenCombobox(): void {
     this.isComboboxOpen = !this.isComboboxOpen;
   }
 
   onSelectValue(cbVal : IBaseData): void {
+    //TODO refactoring
     console.log('Selected ' + cbVal.name);
-    this.currentValue = cbVal.name;
-    if(this.multiselect){
-      this.data.find(data => data.name == cbVal.name).selected = true;
 
+    var item = this.data.find(data => data.name == cbVal.name);
+
+    if(this.multiselect){
+      if(!this.currentValue)
+        this.currentValue = "";
+
+      if(item.selected)
+        this.currentValue = this.currentValue.replace(item.name + ",", "");
+      else
+        this.currentValue += cbVal.name + ", ";
+
+      //echange selection state of item
+      item.selected = !item.selected
+
+      this.currentValue = this.currentValue.trim();
+
+      this._updateSelectedItems();
       return; //don't close value list in multiselect mode
     }
+
+    //echange selection state of item
+    var curState =item.selected;
+    //reset selections
+    this.data.forEach(function (val) {
+      val.selected = false;
+    });
+    //set opposite state to current item
+    item.selected = !curState;
+
+    this.currentValue = cbVal.name;
+
+    this._updateSelectedItems();
 
     //close comboboxvalue list
     this.isComboboxOpen = false;
