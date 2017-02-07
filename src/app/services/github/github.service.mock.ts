@@ -33,4 +33,4 @@ export let PROJECTS : GitHubProject[] = [
     name: 'SteamControllerCopterControl',
     url: 'https://github.com/zBritva/SteamControllerCopterControl'
   }
-]
+];

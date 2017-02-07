@@ -3,7 +3,7 @@
  */
 
 import {
-  Component, OnInit, Input, Provider, ReflectiveInjector, Inject, Injector, Output,
+  Component, OnInit, Input, Injector, Output,
   EventEmitter
 } from '@angular/core';
 
@@ -73,7 +73,7 @@ export class ExtendComboboxComponent implements OnInit {
     //TODO refactoring
     console.log('Selected ' + cbVal.name);
 
-    var item = this.data.find(data => data.name == cbVal.name);
+    let item = this.data.find(data => data.name == cbVal.name);
 
     if(this.multiselect){
       if(!this.currentValue)
@@ -85,7 +85,7 @@ export class ExtendComboboxComponent implements OnInit {
         this.currentValue += cbVal.name + ", ";
 
       //echange selection state of item
-      item.selected = !item.selected
+      item.selected = !item.selected;
 
       this.currentValue = this.currentValue.trim();
 
@@ -94,7 +94,7 @@ export class ExtendComboboxComponent implements OnInit {
     }
 
     //echange selection state of item
-    var curState =item.selected;
+    let curState =item.selected;
     //reset selections
     this.data.forEach(function (val) {
       val.selected = false;
