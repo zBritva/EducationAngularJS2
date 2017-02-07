@@ -1,3 +1,16 @@
-<div>
-  <input name = "mainField" type="text">
+<div class="extendcombobox" tabindex="0">
+  <div class="extendcombobox_body">
+    <input name="mainField" type="text" [(ngModel)]="currentValue" placeholder="Print to search" (keypress)="onKeyPress($event)">
+    <!--*ngIf="currentValue"-->
+    <!--<input *ngIf="!currentValue" name="mainField" type="text" value="" (keypress)="onKeyPress(this.value)">-->
+    <button name="openCombobox" (click)="onOpenCombobox()" ></button>
+    <button name="onAddNewItem" (click)="onAddItem()" >+</button>
+  </div>
+  <div *ngIf="isComboboxOpen" class="combobox_list" (blur)="onBlurValueList()">
+    <ul>
+      <li *ngFor="let cbVal of data" (click)="onSelectValue(cbVal)">
+        {{cbVal.name}}
+      </li>
+    </ul>
+  </div>
 </div>

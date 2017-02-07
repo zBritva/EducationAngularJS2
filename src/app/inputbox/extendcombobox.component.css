@@ -1,0 +1,74 @@
+.extendcombobox {
+
+}
+
+.extendcombobox:focus {
+  border: none;
+}
+
+.extendcombobox_body {
+  padding: .1em;
+  /*border: 1px solid black;*/
+}
+
+.extendcombobox input {
+  height: 2em;
+  font-size: 1em;
+  padding-left: .4em;
+}
+.extendcombobox button {
+  height: 2.5em;
+  font-family: Arial;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 4px;
+  width: 2.5em;
+}
+
+/*There are styles for padding list of values for selection*/
+
+.combobox_list {
+  margin: 0 0 0em 0;
+  list-style-type: none;
+  padding: .2em;
+  width: 15em;
+  float:left;
+  overflow-y: auto;
+  height: 100px;
+  position: absolute;
+  z-index: 1000;
+  background-color: #BBD8DC;
+}
+
+.combobox_list ul {
+  padding-left: 0em;
+}
+
+.combobox_list li {
+  list-style: none;
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #EEE;
+  margin: .2em;
+  padding: .1em 0;
+  height: 1.5em;
+  border-radius: 3px;
+}
+
+.combobox_list li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  /*left: .1em;*/
+}
+
+.combobox_list li.selected {
+  color: #607D8B;
+  background-color: #7797dd;
+  /*left: .1em;*/
+}
+
+.combobox_list li.selected:hover {
+  background-color: #BBD8DC !important;
+  color: white;
+}

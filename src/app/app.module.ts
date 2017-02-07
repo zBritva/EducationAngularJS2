@@ -6,7 +6,7 @@ import { AppComponent }  from './app.component';
 import {ExtendComboboxComponent} from "./inputbox/extendcombobox.component";
 
 @NgModule({
-  imports:      [ BrowserModule ],
+  imports:      [ BrowserModule, FormsModule ],
   declarations: [ AppComponent, ExtendComboboxComponent ],
   bootstrap:    [ AppComponent ]
 })
