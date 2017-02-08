@@ -24,6 +24,7 @@ import {BitBucketService} from "../services/bitbucket/bitbucket.service";
   ]
 })
 export class ExtendComboboxComponent implements OnInit {
+  isInsideOfList: boolean;
   isComboboxOpen: boolean;
   dataService: IDataService;
   data: Array<IBaseData>;
@@ -67,6 +68,8 @@ export class ExtendComboboxComponent implements OnInit {
 
   onOpenCombobox(): void {
     this.isComboboxOpen = !this.isComboboxOpen;
+    if(this.isComboboxOpen)
+      this.isInsideOfList = true;
   }
 
   onSelectValue(cbVal : IBaseData): void {
@@ -112,6 +115,22 @@ export class ExtendComboboxComponent implements OnInit {
 
   onBlurValueList(): void {
     this.isComboboxOpen = false;
+  }
+
+  onValueListMouseOut(): void {
+    this.isInsideOfList = false;
+    setTimeout(()=> {
+      if(!this.isInsideOfList)
+        this.isComboboxOpen = false;
+    }, 400);
+  }
+
+  onValueListMouseOverParent(): void{
+    this.isInsideOfList = true;
+  }
+
+  onValueListMouseOver(): void{
+    this.isInsideOfList = true;
   }
 
   onKeyPress(event: any){

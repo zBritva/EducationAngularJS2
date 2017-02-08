@@ -6,9 +6,9 @@
     <button name="openCombobox" (click)="onOpenCombobox()" ></button>
     <button name="onAddNewItem" (click)="onAddItem()" >+</button>
   </div>
-  <div *ngIf="isComboboxOpen" class="combobox_list" (blur)="onBlurValueList()">
-    <ul>
-      <li *ngFor="let cbVal of data" (click)="onSelectValue(cbVal)" [attr.selected]="cbVal.selected">
+  <div *ngIf="isComboboxOpen" class="combobox_list" (blur)="onBlurValueList()" (mouseout)="onValueListMouseOut()" (mouseover)="onValueListMouseOverParent()">
+    <ul (mouseover)="onValueListMouseOver()">
+      <li *ngFor="let cbVal of data" (click)="onSelectValue(cbVal)" [attr.selected]="cbVal.selected" (mouseover)="onValueListMouseOver()">
         {{cbVal.name}}
       </li>
     </ul>
