@@ -1,4 +1,4 @@
-<div class="extendcombobox" tabindex="0">
+<div class="extendcombobox" tabindex="0" ExtendComboboxHighlight>
   <div class="extendcombobox_body">
     <input name="mainField" type="text" [(ngModel)]="currentValue" placeholder="Print to search" (keypress)="onKeyPress($event)">
     <!--*ngIf="currentValue"-->
@@ -6,9 +6,9 @@
     <button name="openCombobox" (click)="onOpenCombobox()" ></button>
     <button name="onAddNewItem" (click)="onAddItem()" >+</button>
   </div>
-  <div *ngIf="isComboboxOpen" class="combobox_list" (blur)="onBlurValueList()" (mouseout)="onValueListMouseOut()" (mouseover)="onValueListMouseOverParent()">
-    <ul (mouseover)="onValueListMouseOver()">
-      <li *ngFor="let cbVal of data" (click)="onSelectValue(cbVal)" [attr.selected]="cbVal.selected" (mouseover)="onValueListMouseOver()">
+  <div *ngIf="isComboboxOpen" class="combobox_list" (mouseleave)="onValueListMouseLeave()">
+    <ul>
+      <li *ngFor="let cbVal of data" (click)="onSelectValue(cbVal)" [attr.selected]="cbVal.selected">
         {{cbVal.name}}
       </li>
     </ul>

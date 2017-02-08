@@ -113,24 +113,8 @@ export class ExtendComboboxComponent implements OnInit {
     this.isComboboxOpen = false;
   }
 
-  onBlurValueList(): void {
+  onValueListMouseLeave(): void {
     this.isComboboxOpen = false;
-  }
-
-  onValueListMouseOut(): void {
-    this.isInsideOfList = false;
-    setTimeout(()=> {
-      if(!this.isInsideOfList)
-        this.isComboboxOpen = false;
-    }, 400);
-  }
-
-  onValueListMouseOverParent(): void{
-    this.isInsideOfList = true;
-  }
-
-  onValueListMouseOver(): void{
-    this.isInsideOfList = true;
   }
 
   onKeyPress(event: any){
